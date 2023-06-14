@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:superbikes/login/components/login_form.dart';
+
+class LogInScreen extends StatelessWidget {
+  const LogInScreen({super.key});
+  static const routeName = '/';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // backgroundColor: Color.fromRGBO(76, 134, 182, 1),
+      body: Center(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromRGBO(0, 89, 162, 1),
+              Color.fromRGBO(76, 134, 182, 1),
+            ],
+          )),
+          child: FractionallySizedBox(
+            heightFactor: 0.60,
+            widthFactor: 0.5,
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: FractionallySizedBox(
+                      widthFactor: 0.7,
+                      child: Image.asset("assets/images/header.jpg"),
+                    ),
+                  ),
+                  const FractionallySizedBox(
+                    widthFactor: 0.9,
+                    child: LoginForm(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Please keep your mobile number updated!"),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text("Update here"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
