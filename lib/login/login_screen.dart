@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:superbikes/login/components/login_form.dart';
 
+import '../global/logo_header.dart';
+
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
   static const routeName = '/';
@@ -23,8 +25,8 @@ class LogInScreen extends StatelessWidget {
             ],
           )),
           child: FractionallySizedBox(
-            heightFactor: 0.60,
-            widthFactor: 0.5,
+            heightFactor: 0.7,
+            widthFactor: 0.7,
             child: Container(
               width: double.infinity,
               height: double.infinity,
@@ -33,27 +35,18 @@ class LogInScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
-                    child: FractionallySizedBox(
-                      widthFactor: 0.7,
-                      child: Image.asset("assets/images/header.jpg"),
-                    ),
-                  ),
+                  const LogoHeader(),
                   const FractionallySizedBox(
                     widthFactor: 0.9,
                     child: LoginForm(),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Please keep your mobile number updated!"),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text("Update here"),
-                      ),
-                    ],
+                  const Text("Please keep your mobile number updated!"),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text("Update here"),
                   ),
                 ],
               ),

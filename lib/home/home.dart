@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:superbikes/global/logo_header.dart';
 import 'package:superbikes/home/components/account_details.dart';
 import 'package:superbikes/home/components/payment_details.dart';
 
@@ -27,17 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
           height: double.infinity,
           width: double.infinity,
           decoration: const BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromRGBO(0, 89, 162, 1),
-              Color.fromRGBO(76, 134, 182, 1),
-            ],
-          )),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(0, 89, 162, 1),
+                Color.fromRGBO(76, 134, 182, 1),
+              ],
+            ),
+          ),
           child: FractionallySizedBox(
-            heightFactor: 0.60,
-            widthFactor: 0.5,
+            heightFactor: 0.7,
+            widthFactor: 0.7,
             child: Container(
               width: double.infinity,
               height: double.infinity,
@@ -46,13 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
-                    child: FractionallySizedBox(
-                      widthFactor: 0.7,
-                      child: Image.asset("assets/images/header.jpg"),
-                    ),
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: const LogoHeader(),
                   ),
                   FractionallySizedBox(
                     widthFactor: 0.9,
@@ -60,52 +60,67 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //Account Details
-                        const Text(
-                          'Account Details',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: const Text(
+                            'Account Details',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        Card(
-                          color: Colors.blue.shade50,
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Card(
+                            color: Colors.blue.shade50,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: AccountDetails(),
                             ),
-                            child: AccountDetails(),
                           ),
                         ),
 
                         //Payment Details
-                        const Text(
-                          'Last Payment Details',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: const Text(
+                            'Last Payment Details',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        Card(
-                          color: Colors.blue.shade50,
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Card(
+                            color: Colors.blue.shade50,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: PaymentDetails(),
                             ),
-                            child: PaymentDetails(),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(0, 89, 162, 1),
-                      foregroundColor: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(0, 89, 162, 1),
+                        foregroundColor: Colors.white,
+                      ),
+                      child: const Text('Exit'),
                     ),
-                    child: const Text('Exit'),
                   )
                 ],
               ),
