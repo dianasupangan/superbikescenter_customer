@@ -89,7 +89,7 @@ class _CardDetailsState extends State<CardDetails> {
                       width: 10,
                     ),
                     Text(
-                      "  Sample",
+                      "  ₱ 110000",
                       style: TextStyle(fontSize: 15),
                     ),
                   ],
@@ -118,7 +118,7 @@ class _CardDetailsState extends State<CardDetails> {
                       width: 10,
                     ),
                     Text(
-                      "  Sample",
+                      "  ₱ 4000",
                       style: TextStyle(fontSize: 15),
                     ),
                   ],

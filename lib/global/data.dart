@@ -1,4 +1,4 @@
 const basicData = [
-  {'status': 'Paid', 'amount': 275},
-  {'status': 'Balance', 'amount': 115},
+  {'status': 'Paid', 'amount': 4000},
+  {'status': 'Balance', 'amount': 110000},
 ];

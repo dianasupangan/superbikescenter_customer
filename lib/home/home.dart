@@ -22,15 +22,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: FractionallySizedBox(
-          widthFactor: .3,
-          child: Image.asset("assets/images/header.jpg"),
-        ),
-      ),
       body: Center(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: FractionallySizedBox(
+                widthFactor: .3,
+                child: Image.asset("assets/images/header.jpg"),
+              ),
+            ),
             FractionallySizedBox(
               widthFactor: .9,
               child: Padding(
@@ -61,7 +62,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: PaymentDetails(),
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: Text('Exit'))
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.red.shade200),
+                foregroundColor: MaterialStatePropertyAll(Colors.white),
+              ),
+              child: Text('Exit'),
+            ),
           ],
         ),
       ),

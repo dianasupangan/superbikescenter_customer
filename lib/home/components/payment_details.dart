@@ -15,6 +15,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            "Last Payment Details",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           //Payment Date
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,7 +31,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               Text(
-                "Sample",
+                "06/15/2023",
                 style: TextStyle(fontSize: 13),
               ),
             ],
@@ -39,7 +46,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               Text(
-                "Sample",
+                "₱ 2000",
                 style: TextStyle(fontSize: 13),
               ),
             ],
@@ -54,7 +61,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               Text(
-                "Sample",
+                "OR-12345",
                 style: TextStyle(fontSize: 13),
               ),
             ],

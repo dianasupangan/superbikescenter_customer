@@ -17,7 +17,7 @@ class _AccountDetailsState extends State<AccountDetails> {
         children: [
           //Name
           Text(
-            "Name",
+            "Juan Dela Cruz",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
 
@@ -30,7 +30,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               Text(
-                "Sample",
+                "12345",
                 style: TextStyle(fontSize: 13),
               ),
             ],
@@ -45,7 +45,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               Text(
-                "Sample",
+                "Approved",
                 style: TextStyle(fontSize: 13),
               ),
             ],
@@ -75,7 +75,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               Text(
-                "Sample",
+                "2 Months",
                 style: TextStyle(fontSize: 13),
               ),
             ],
