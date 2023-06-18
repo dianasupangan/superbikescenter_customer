@@ -56,8 +56,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
                           _fieldThree.text +
                           _fieldFour.text;
                     });
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed(HomeScreen.routeName);
+                    confirmOTP();
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(
@@ -98,5 +97,10 @@ class _OtpTextFieldState extends State<OtpTextField> {
         ),
       ],
     );
+  }
+
+  Future<void> confirmOTP() async {
+    Navigator.of(context).pop();
+    Navigator.of(context).pushNamed(HomeScreen.routeName);
   }
 }

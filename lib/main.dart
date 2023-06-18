@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:superbikes/home/home.dart';
+import 'package:superbikes/login/login_screen.dart';
+import 'package:superbikes/provider/loan.dart';
+import 'package:superbikes/provider/user.dart';
 
 import 'global/routes.dart';
-import 'login/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +16,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => User(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Loan(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData.light(
+          useMaterial3: true,
+        ),
+        title: "SuperBikes",
+        home: const LogInScreen(),
+        routes: routes,
       ),
-      title: "SuperBikes",
-      home: const LogInScreen(),
-      routes: routes,
     );
   }
 }

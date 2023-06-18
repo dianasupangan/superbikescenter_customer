@@ -17,6 +17,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
         children: [
           //Payment Date
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Payment Date: ",
@@ -31,6 +32,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
 
           //Payment Amount
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Payment Amount: ",
@@ -45,6 +47,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
 
           //OR Number
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "OR Number: ",

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class UserInfo {
+class LoanInfo {
   final String paymentDate;
   final String paymentAmount;
   final String receiptNumber;
 
-  UserInfo({
+  LoanInfo({
     required this.paymentDate,
     required this.paymentAmount,
     required this.receiptNumber,
   });
 }
 
-class User extends ChangeNotifier {
-  final List<UserInfo> items = [];
+class Loan extends ChangeNotifier {
+  final List<LoanInfo> items = [];
 
   void add(
     String pDate,
@@ -21,7 +21,7 @@ class User extends ChangeNotifier {
     String rNumber,
   ) async {
     items.add(
-      UserInfo(
+      LoanInfo(
         paymentDate: pDate,
         paymentAmount: pAmount,
         receiptNumber: rNumber,

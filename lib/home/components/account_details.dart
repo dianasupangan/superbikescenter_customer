@@ -23,6 +23,7 @@ class _AccountDetailsState extends State<AccountDetails> {
 
           //Loan ID
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Loan ID: ",
@@ -37,6 +38,7 @@ class _AccountDetailsState extends State<AccountDetails> {
 
           //Loan Status
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Loan Status: ",
@@ -51,6 +53,7 @@ class _AccountDetailsState extends State<AccountDetails> {
 
           //Loan Terms
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Loan Terms: ",
@@ -65,6 +68,7 @@ class _AccountDetailsState extends State<AccountDetails> {
 
           //# of Months of Paid
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "# of Months Paid: ",

@@ -53,7 +53,7 @@ class _LoginFormState extends State<LoginForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: ElevatedButton(
                       onPressed: () {
-                        showMyDialog();
+                        LogIn();
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(
@@ -114,5 +114,9 @@ class _LoginFormState extends State<LoginForm> {
         );
       },
     );
+  }
+
+  Future<void> LogIn() async {
+    showMyDialog();
   }
 }
