@@ -67,9 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.of(context).pop();
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.red.shade200),
-                foregroundColor: MaterialStatePropertyAll(Colors.white),
-              ),
+                  backgroundColor: MaterialStatePropertyAll(Colors.white),
+                  foregroundColor: MaterialStatePropertyAll(Colors.red),
+                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.red, width: 1)))),
               child: Text('Exit'),
             ),
           ],
