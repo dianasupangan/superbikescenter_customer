@@ -10,78 +10,103 @@ class AccountDetails extends StatefulWidget {
 class _AccountDetailsState extends State<AccountDetails> {
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //Name
-          Text(
-            "Juan Dela Cruz",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    return Column(
+      children: [
+        Container(
+          width: double.infinity,
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 3),
+          child: Text(
+            "Account Details:",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+        ),
+        Card(
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Name
+                  Text(
+                    "Juan Dela Cruz",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
 
-          //Loan ID
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Loan ID: ",
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "12345",
-                style: TextStyle(fontSize: 13),
-              ),
-            ],
-          ),
+                  //Loan ID
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Loan ID: ",
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "12345",
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ],
+                  ),
 
-          //Loan Status
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Loan Status: ",
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Approved",
-                style: TextStyle(fontSize: 13),
-              ),
-            ],
-          ),
+                  //Loan Status
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Loan Status: ",
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "Approved",
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ],
+                  ),
 
-          //Loan Terms
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Loan Terms: ",
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Sample",
-                style: TextStyle(fontSize: 13),
-              ),
-            ],
-          ),
+                  //Loan Terms
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Loan Terms: ",
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "Sample",
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ],
+                  ),
 
-          //# of Months of Paid
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "# of Months Paid: ",
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  //# of Months of Paid
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "# of Months Paid: ",
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "2 Months",
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              Text(
-                "2 Months",
-                style: TextStyle(fontSize: 13),
-              ),
-            ],
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

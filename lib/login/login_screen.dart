@@ -10,6 +10,7 @@ class LogInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // backgroundColor: Color.fromRGBO(76, 134, 182, 1),
       body: Center(
         child: Container(

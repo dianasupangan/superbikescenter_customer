@@ -53,6 +53,10 @@ class _LoginFormState extends State<LoginForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: ElevatedButton(
                       onPressed: () {
+                        setState(() {
+                          loanIdController.text = '';
+                          mobileNumberController.text = '';
+                        });
                         LogIn();
                       },
                       style: ElevatedButton.styleFrom(
