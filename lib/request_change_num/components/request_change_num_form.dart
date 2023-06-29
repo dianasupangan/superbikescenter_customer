@@ -7,14 +7,14 @@ import 'package:superbikes/global/cyware_key.dart';
 
 import 'otp/otp_textfield.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class RequestChangeNumForm extends StatefulWidget {
+  const RequestChangeNumForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<RequestChangeNumForm> createState() => _RequestChangeNumFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
   late final loanIdController = TextEditingController();
   final mobileNumberController = TextEditingController();
 
@@ -71,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
                         backgroundColor: const Color.fromRGBO(0, 89, 162, 1),
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text("Log In"),
+                      child: const Text("Get OTP"),
                     ),
                   ),
                 ),
@@ -111,36 +111,35 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future<void> logIn() async {
-    // showMyDialog();
     final loanId = loanIdController.text;
     final mobileNum = mobileNumberController.text;
-    final cywareCode = cywareCodeLogIn(loanId);
-    print(cywareCodeOtp(loanId));
-    var url = Uri.parse("http://10.6.18.166/cyware/super_bikes_api.cgi");
-    var response = await http.post(
-      url,
-      body: jsonEncode(<String, dynamic>{
-        "super_bikes": {
-          "state": "state_login",
-          "loan_id": loanId,
-          "mobile_number": mobileNum,
-          "cyware_key": cywareCode,
-          "is_debug": "1"
-        }
-      }),
-    );
-    final utf = utf8.decode(response.bodyBytes);
-    final json = jsonDecode(utf);
+    // final cywareCode = cywareCodeLogIn(loanId);
+    // print(cywareCodeOtp(loanId));
+    // var url = Uri.parse("http://10.6.18.166/cyware/super_bikes_api.cgi");
+    // var response = await http.post(
+    //   url,
+    //   body: jsonEncode(<String, dynamic>{
+    //     "super_bikes": {
+    //       "state": "state_login",
+    //       "loan_id": loanId,
+    //       "mobile_number": mobileNum,
+    //       "cyware_key": cywareCode,
+    //       "is_debug": "1"
+    //     }
+    //   }),
+    // );
+    // final utf = utf8.decode(response.bodyBytes);
+    // final json = jsonDecode(utf);
 
-    print("json: " + json.toString());
+    // print("json: " + json.toString());
 
-    final status = json['cyware_super_bikes']['result']['status'];
+    // final status = json['cyware_super_bikes']['result']['status'];
 
-    if (status == "success") {
-      showMyDialog(loanId, mobileNum);
-    } else if (status == "failed") {
-      print("failed");
-    }
+    // if (status == "success") {
+    showMyDialog(loanId, mobileNum);
+    // } else if (status == "failed") {
+    //   print("failed");
+    // }
   }
 
   void showMyDialog(String loanId, String mobileNum) async {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/user.dart';
 
 class AccountDetails extends StatefulWidget {
   const AccountDetails({super.key});
@@ -10,13 +13,14 @@ class AccountDetails extends StatefulWidget {
 class _AccountDetailsState extends State<AccountDetails> {
   @override
   Widget build(BuildContext context) {
+    final userData = Provider.of<User>(context, listen: false);
     return Column(
       children: [
         Container(
           width: double.infinity,
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 3),
-          child: Text(
+          child: const Text(
             "Account Details:",
             style: TextStyle(
               fontSize: 15,
@@ -28,13 +32,13 @@ class _AccountDetailsState extends State<AccountDetails> {
           child: SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //Name
                   Text(
-                    "Juan Dela Cruz",
+                    userData.items.first.lastName.toString(),
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
 
@@ -48,7 +52,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "12345",
+                        userData.items.first.loanID.toString(),
                         style: TextStyle(fontSize: 13),
                       ),
                     ],
@@ -64,7 +68,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Approved",
+                        userData.items.first.loanStatus.toString(),
                         style: TextStyle(fontSize: 13),
                       ),
                     ],
@@ -80,7 +84,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Sample",
+                        userData.items.first.loanStatus.toString(),
                         style: TextStyle(fontSize: 13),
                       ),
                     ],
@@ -96,7 +100,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "2 Months",
+                        "${userData.items.first.numberMonthsPaid}  Months",
                         style: TextStyle(fontSize: 13),
                       ),
                     ],

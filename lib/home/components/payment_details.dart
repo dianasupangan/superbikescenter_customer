@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/loan.dart';
 
 class PaymentDetails extends StatefulWidget {
   const PaymentDetails({super.key});
@@ -10,13 +13,14 @@ class PaymentDetails extends StatefulWidget {
 class _PaymentDetailsState extends State<PaymentDetails> {
   @override
   Widget build(BuildContext context) {
+    final loanData = Provider.of<Loan>(context, listen: false);
     return Column(
       children: [
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 3),
           alignment: Alignment.centerLeft,
-          child: Text(
+          child: const Text(
             "Last Payment Details:",
             style: TextStyle(
               fontSize: 15,
@@ -25,7 +29,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           ),
         ),
         Card(
-          child: const SizedBox(
+          child: SizedBox(
             width: double.infinity,
             child: Padding(
               padding: EdgeInsets.all(12.0),
@@ -42,7 +46,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "06/15/2023",
+                        loanData.items.first.paymentDate.toString(),
                         style: TextStyle(fontSize: 13),
                       ),
                     ],
@@ -58,7 +62,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "₱ 2,000",
+                        "₱ ${loanData.items.first.paymentAmount.toString()}",
                         style: TextStyle(fontSize: 13),
                       ),
                     ],
@@ -74,7 +78,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "OR-12345",
+                        loanData.items.first.receiptNumber.toString(),
                         style: TextStyle(fontSize: 13),
                       ),
                     ],

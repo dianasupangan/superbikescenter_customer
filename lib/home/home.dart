@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:superbikes/home/components/account_details.dart';
 import 'package:superbikes/home/components/payment_details.dart';
-import 'package:superbikes/login/components/login_form.dart';
 
 import '../global/logo_header.dart';
 
@@ -41,23 +40,23 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
                     child: FractionallySizedBox(
                       widthFactor: .7,
                       child: LogoHeader(),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-                    child: const FractionallySizedBox(
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
+                    child: FractionallySizedBox(
                       widthFactor: 0.9,
                       child: AccountDetails(),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child: const FractionallySizedBox(
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: FractionallySizedBox(
                       widthFactor: 0.9,
                       child: PaymentDetails(),
                     ),
@@ -68,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("Exit"),

@@ -7,14 +7,14 @@ import 'package:superbikes/global/cyware_key.dart';
 
 import 'otp/otp_textfield.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class ChangeNumForm extends StatefulWidget {
+  const ChangeNumForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<ChangeNumForm> createState() => _ChangeNumFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _ChangeNumFormState extends State<ChangeNumForm> {
   late final loanIdController = TextEditingController();
   final mobileNumberController = TextEditingController();
 
@@ -29,7 +29,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           child: TextField(
             decoration: const InputDecoration(
-              label: Text('Loan ID'),
+              label: Text('New Mobile Number'),
               border: OutlineInputBorder(),
             ),
             controller: loanIdController,
@@ -42,7 +42,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           child: TextField(
             decoration: const InputDecoration(
-              label: Text('Mobile Number'),
+              label: Text('Confirm New Mobile Number'),
               border: OutlineInputBorder(),
             ),
             controller: mobileNumberController,
@@ -71,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
                         backgroundColor: const Color.fromRGBO(0, 89, 162, 1),
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text("Log In"),
+                      child: const Text("Confirm"),
                     ),
                   ),
                 ),

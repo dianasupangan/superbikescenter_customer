@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:superbikes/login/components/login_form.dart';
+import 'package:superbikes/login/login_screen.dart';
+import 'package:superbikes/request_change_num/components/request_change_num_form.dart';
 
-import '../request_change_num/request_change_num_screen.dart';
 import '../global/logo_header.dart';
 
-class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
-  static const routeName = '/';
+class RequestChangeNumberScreen extends StatelessWidget {
+  const RequestChangeNumberScreen({super.key});
+  static const routeName = 'request-change-number';
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +40,26 @@ class LogInScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const LogoHeader(),
+                  // const LogoHeader(),
+                  Padding(
+                    padding: const EdgeInsets.all(9.0),
+                    child: const Text(
+                      "Change Number",
+                      style: TextStyle(
+                        fontSize: 25,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   const FractionallySizedBox(
                     widthFactor: 0.9,
-                    child: LoginForm(),
+                    child: RequestChangeNumForm(),
                   ),
-                  const Text("Please keep your mobile number updated!"),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(RequestChangeNumberScreen.routeName);
+                      Navigator.of(context).pop(LogInScreen.routeName);
                     },
-                    child: const Text("Update here"),
+                    child: const Text("Go Back"),
                   ),
                 ],
               ),
