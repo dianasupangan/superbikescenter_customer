@@ -59,7 +59,7 @@ class RequestChangeNumberScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop(LogInScreen.routeName);
                     },
-                    child: const Text("Go Back"),
+                    child: const Text("< Back"),
                   ),
                 ],
               ),
