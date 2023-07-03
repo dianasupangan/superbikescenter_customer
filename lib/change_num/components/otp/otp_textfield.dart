@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superbikes/global/cyware_key.dart';
+import 'package:superbikes/global/link_header.dart';
 import 'package:superbikes/home/home.dart';
 import 'package:superbikes/login/login_screen.dart';
 import 'package:http/http.dart' as http;
@@ -125,58 +126,31 @@ class _OtpTextFieldState extends State<OtpTextField> {
   }
 
   Future<void> confirmOTP() async {
-    final userData = Provider.of<User>(context, listen: false);
-    final loanData = Provider.of<Loan>(context, listen: false);
-    // showMyDialog();
     final otp = _otp;
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
-    final cywareCode = cywareCodeOtp(loanId);
-    var url = Uri.parse("http://10.6.18.166/cyware/super_bikes_api.cgi");
-    var response = await http.post(
-      url,
-      body: jsonEncode(
-        <String, dynamic>{
-          "super_bikes": {
-            "state": "state_login_otp",
-            "loan_id": loanId,
-            "mobile_number": mobileNum,
-            "otp": otp,
-            "cyware_key": cywareCode,
-            "is_debug": "1"
-          }
-        },
-      ),
-    );
-    final utf = utf8.decode(response.bodyBytes);
-    final json = jsonDecode(utf);
+    var url = Uri.parse(link_header);
+    // var response = await http.post(
+    //   url,
+    //   body: jsonEncode(
+    //     <String, dynamic>{
+    //       "super_bikes": {
+    //         "state": "state_login_otp",
+    //         "loan_id": loanId,
+    //         "mobile_number": mobileNum,
+    //         "otp": otp,
+    //         "cyware_key": cywareCode,
+    //         "is_debug": "1"
+    //       }
+    //     },
+    //   ),
+    // );
+    // final utf = utf8.decode(response.bodyBytes);
+    // final json = jsonDecode(utf);
 
-    print("json: " + json.toString());
+    // print("json: " + json.toString());
 
-    final status = json['cyware_super_bikes']['result']['status'];
-
-    if (status == "success") {
-      final acctName =
-          json['cyware_super_bikes']['data']['account_name'].toString();
-      final loanStat =
-          json['cyware_super_bikes']['data']['loan_status'].toString();
-      final loanTerms =
-          json['cyware_super_bikes']['data']['loan_terms'].toString();
-      final monthPaid =
-          json['cyware_super_bikes']['data']['months_paid'].toString();
-      userData.add(loanId, acctName, acctName, loanStat, loanTerms, monthPaid);
-
-      final paymentDate =
-          json['cyware_super_bikes']['data']['payment_date'].toString();
-      final paymentAmount =
-          json['cyware_super_bikes']['data']['payment_amount'].toString();
-      final orNumber =
-          json['cyware_super_bikes']['data']['or_number'].toString();
-      loanData.add(paymentDate, paymentAmount, orNumber);
-
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-    } else if (status == "failed") {
-      print("failed");
-    }
+    // final status = json['cyware_super_bikes']['result']['status'];
+    Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
   }
 }

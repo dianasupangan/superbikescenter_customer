@@ -9,6 +9,7 @@ import 'package:superbikes/login/login_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/provider/loan.dart';
 
+import '../../../global/link_header.dart';
 import '../../../provider/user.dart';
 import 'otp_input.dart';
 
@@ -132,7 +133,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
     final cywareCode = cywareCodeOtp(loanId);
-    var url = Uri.parse("http://10.6.18.166/cyware/super_bikes_api.cgi");
+    var url = Uri.parse(link_header);
     var response = await http.post(
       url,
       body: jsonEncode(

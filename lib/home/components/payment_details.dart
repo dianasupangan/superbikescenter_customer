@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../../provider/loan.dart';
 
@@ -14,6 +15,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   @override
   Widget build(BuildContext context) {
     final loanData = Provider.of<Loan>(context, listen: false);
+    var f = NumberFormat("##,###,###.0#", "en_US");
+    final amount =
+        f.format(int.parse(loanData.items.first.paymentAmount.toString()));
     return Column(
       children: [
         Container(
@@ -62,7 +66,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "₱ ${loanData.items.first.paymentAmount.toString()}",
+                        "₱ $amount",
                         style: TextStyle(fontSize: 13),
                       ),
                     ],

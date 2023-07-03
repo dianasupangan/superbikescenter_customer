@@ -111,36 +111,34 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
   }
 
   Future<void> logIn() async {
-    // showMyDialog();
     final loanId = loanIdController.text;
     final mobileNum = mobileNumberController.text;
-    final cywareCode = cywareCodeLogIn(loanId);
-    print(cywareCodeOtp(loanId));
+    // final cywareCode = cywareCodeLogIn(loanId);
     var url = Uri.parse("http://10.6.18.166/cyware/super_bikes_api.cgi");
-    var response = await http.post(
-      url,
-      body: jsonEncode(<String, dynamic>{
-        "super_bikes": {
-          "state": "state_login",
-          "loan_id": loanId,
-          "mobile_number": mobileNum,
-          "cyware_key": cywareCode,
-          "is_debug": "1"
-        }
-      }),
-    );
-    final utf = utf8.decode(response.bodyBytes);
-    final json = jsonDecode(utf);
+    // var response = await http.post(
+    //   url,
+    //   body: jsonEncode(<String, dynamic>{
+    //     "super_bikes": {
+    //       "state": "state_login",
+    //       "loan_id": loanId,
+    //       "mobile_number": mobileNum,
+    //       "cyware_key": cywareCode,
+    //       "is_debug": "1"
+    //     }
+    //   }),
+    // );
+    // final utf = utf8.decode(response.bodyBytes);
+    // final json = jsonDecode(utf);
 
-    print("json: " + json.toString());
+    // print("json: " + json.toString());
 
-    final status = json['cyware_super_bikes']['result']['status'];
+    // final status = json['cyware_super_bikes']['result']['status'];
 
-    if (status == "success") {
-      showMyDialog(loanId, mobileNum);
-    } else if (status == "failed") {
-      print("failed");
-    }
+    // if (status == "success") {
+    showMyDialog(loanId, mobileNum);
+    // } else if (status == "failed") {
+    //   print("failed");
+    // }
   }
 
   void showMyDialog(String loanId, String mobileNum) async {
@@ -155,8 +153,4 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
       },
     );
   }
-  //001-0000663
-  //639542896532
-  //c2d356490849e2373e545f4815e4f95c login
-  //2006a327e61fed7000571c09538e9e92 otp
 }

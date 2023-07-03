@@ -84,7 +84,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        userData.items.first.loanStatus.toString(),
+                        "${userData.items.first.loanTerms.toString()} Months",
                         style: TextStyle(fontSize: 13),
                       ),
                     ],

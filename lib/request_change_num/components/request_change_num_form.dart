@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/global/cyware_key.dart';
+import 'package:superbikes/global/link_header.dart';
 
 import 'otp/otp_textfield.dart';
 
@@ -113,9 +114,7 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
   Future<void> logIn() async {
     final loanId = loanIdController.text;
     final mobileNum = mobileNumberController.text;
-    // final cywareCode = cywareCodeLogIn(loanId);
-    // print(cywareCodeOtp(loanId));
-    // var url = Uri.parse("http://10.6.18.166/cyware/super_bikes_api.cgi");
+    var url = Uri.parse(link_header);
     // var response = await http.post(
     //   url,
     //   body: jsonEncode(<String, dynamic>{
@@ -154,8 +153,4 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
       },
     );
   }
-  //001-0000663
-  //639542896532
-  //c2d356490849e2373e545f4815e4f95c login
-  //2006a327e61fed7000571c09538e9e92 otp
 }
