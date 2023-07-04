@@ -8,6 +8,7 @@ import 'package:superbikes/home/home.dart';
 import 'package:superbikes/login/login_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/provider/loan.dart';
+import 'package:superbikes/widget/snackbar.dart';
 
 import '../../../global/link_header.dart';
 import '../../../provider/user.dart';
@@ -152,8 +153,6 @@ class _OtpTextFieldState extends State<OtpTextField> {
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
 
-    print("json: " + json.toString());
-
     final status = json['cyware_super_bikes']['result']['status'];
 
     if (status == "success") {
@@ -175,9 +174,11 @@ class _OtpTextFieldState extends State<OtpTextField> {
           json['cyware_super_bikes']['data']['or_number'].toString();
       loanData.add(paymentDate, paymentAmount, orNumber);
 
+      showSuccessMessage(context, message: "Log in success");
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } else if (status == "failed") {
-      print("failed");
+      Navigator.of(context).pop();
+      showErrorMessage(context, message: "Login failed");
     }
   }
 }

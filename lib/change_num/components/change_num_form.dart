@@ -3,8 +3,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:superbikes/global/cyware_key.dart';
+import 'package:superbikes/global/link_header.dart';
+import 'package:superbikes/widget/snackbar.dart';
 
+import '../../provider/loan_id.dart';
 import 'otp/otp_textfield.dart';
 
 class ChangeNumForm extends StatefulWidget {
@@ -15,8 +19,8 @@ class ChangeNumForm extends StatefulWidget {
 }
 
 class _ChangeNumFormState extends State<ChangeNumForm> {
-  late final loanIdController = TextEditingController();
-  final mobileNumberController = TextEditingController();
+  late final mobileNumberController = TextEditingController();
+  final confirmMobileNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
               label: Text('New Mobile Number'),
               border: OutlineInputBorder(),
             ),
-            controller: loanIdController,
+            controller: mobileNumberController,
           ),
         ),
         Padding(
@@ -45,7 +49,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
               label: Text('Confirm New Mobile Number'),
               border: OutlineInputBorder(),
             ),
-            controller: mobileNumberController,
+            controller: confirmMobileNumberController,
           ),
         ),
         Padding(
@@ -60,7 +64,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
                       onPressed: () {
                         logIn();
                         setState(() {
-                          loanIdController.text = '';
+                          confirmMobileNumberController.text = '';
                           mobileNumberController.text = '';
                         });
                       },
@@ -81,7 +85,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
                     child: ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          loanIdController.text = '';
+                          confirmMobileNumberController.text = '';
                           mobileNumberController.text = '';
                         });
                       },
@@ -111,34 +115,41 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
   }
 
   Future<void> logIn() async {
-    final loanId = loanIdController.text;
+    final loanIdData = Provider.of<LoanId>(context, listen: false);
+    final loanId = loanIdData.items.last.loanId.toString();
+    final confirmMobileNum = confirmMobileNumberController.text;
     final mobileNum = mobileNumberController.text;
-    // final cywareCode = cywareCodeLogIn(loanId);
-    var url = Uri.parse("http://10.6.18.166/cyware/super_bikes_api.cgi");
-    // var response = await http.post(
-    //   url,
-    //   body: jsonEncode(<String, dynamic>{
-    //     "super_bikes": {
-    //       "state": "state_login",
-    //       "loan_id": loanId,
-    //       "mobile_number": mobileNum,
-    //       "cyware_key": cywareCode,
-    //       "is_debug": "1"
-    //     }
-    //   }),
-    // );
-    // final utf = utf8.decode(response.bodyBytes);
-    // final json = jsonDecode(utf);
+    final cywareCode = cywareCodeNewNum(loanId);
+    var url = Uri.parse(link_header);
 
-    // print("json: " + json.toString());
+    if (confirmMobileNum == mobileNum) {
+      var response = await http.post(
+        url,
+        body: jsonEncode(<String, dynamic>{
+          "super_bikes": {
+            "state": "state_update_mobile",
+            "loan_id": loanId,
+            "mobile_number": mobileNum,
+            "cyware_key": cywareCode,
+            "is_debug": "1"
+          }
+        }),
+      );
+      final utf = utf8.decode(response.bodyBytes);
+      final json = jsonDecode(utf);
 
-    // final status = json['cyware_super_bikes']['result']['status'];
+      print("json: " + json.toString());
 
-    // if (status == "success") {
-    showMyDialog(loanId, mobileNum);
-    // } else if (status == "failed") {
-    //   print("failed");
-    // }
+      final status = json['cyware_super_bikes']['result']['status'];
+
+      if (status == "success") {
+        showMyDialog(loanId, mobileNum);
+      } else if (status == "failed") {
+        showErrorMessage(context, message: "Update Failed");
+      }
+    } else {
+      showErrorMessage(context, message: "Numbers does not match");
+    }
   }
 
   void showMyDialog(String loanId, String mobileNum) async {

@@ -41,6 +41,13 @@ dependencies:
   graphic: ^2.2.0
   intl: ^0.18.1
   crypto: ^3.0.3
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  image_path: "assets/images/icon.jpg"
+  web:
+    generate: true
+    image_path: "assets/images/icon.jpg"
 
 dev_dependencies:
   flutter_test:

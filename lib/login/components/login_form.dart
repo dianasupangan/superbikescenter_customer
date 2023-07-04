@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
+import 'package:superbikes/widget/snackbar.dart';
 
 import 'otp/otp_textfield.dart';
 
@@ -116,7 +117,6 @@ class _LoginFormState extends State<LoginForm> {
     final loanId = loanIdController.text;
     final mobileNum = mobileNumberController.text;
     final cywareCode = cywareCodeLogIn(loanId);
-    print(cywareCodeOtp(loanId));
     var url = Uri.parse(link_header);
     var response = await http.post(
       url,
@@ -140,7 +140,7 @@ class _LoginFormState extends State<LoginForm> {
     if (status == "success") {
       showMyDialog(loanId, mobileNum);
     } else if (status == "failed") {
-      print("failed");
+      showErrorMessage(context, message: "Login fail");
     }
   }
 

@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
-import 'package:superbikes/home/home.dart';
 import 'package:superbikes/login/login_screen.dart';
 import 'package:http/http.dart' as http;
-import 'package:superbikes/provider/loan.dart';
+import 'package:superbikes/widget/snackbar.dart';
 
-import '../../../provider/user.dart';
+import '../../../provider/loan_id.dart';
 import 'otp_input.dart';
 
 class OtpTextField extends StatefulWidget {
@@ -126,31 +125,38 @@ class _OtpTextFieldState extends State<OtpTextField> {
   }
 
   Future<void> confirmOTP() async {
+    final loanIdData = Provider.of<LoanId>(context, listen: false);
     final otp = _otp;
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
+    final cywareCode = cywareCodeNewNumOtp(loanId);
     var url = Uri.parse(link_header);
-    // var response = await http.post(
-    //   url,
-    //   body: jsonEncode(
-    //     <String, dynamic>{
-    //       "super_bikes": {
-    //         "state": "state_login_otp",
-    //         "loan_id": loanId,
-    //         "mobile_number": mobileNum,
-    //         "otp": otp,
-    //         "cyware_key": cywareCode,
-    //         "is_debug": "1"
-    //       }
-    //     },
-    //   ),
-    // );
-    // final utf = utf8.decode(response.bodyBytes);
-    // final json = jsonDecode(utf);
+    var response = await http.post(
+      url,
+      body: jsonEncode(
+        <String, dynamic>{
+          "super_bikes": {
+            "state": "state_update_mobile_otp",
+            "loan_id": loanId,
+            "mobile_number": mobileNum,
+            "otp": otp,
+            "cyware_key": cywareCode,
+            "is_debug": "1"
+          }
+        },
+      ),
+    );
+    final utf = utf8.decode(response.bodyBytes);
+    final json = jsonDecode(utf);
 
-    // print("json: " + json.toString());
+    final status = json['cyware_super_bikes']['result']['status'];
 
-    // final status = json['cyware_super_bikes']['result']['status'];
-    Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    if (status == "success") {
+      loanIdData.add(widget.loanId);
+      showSuccessMessage(context, message: "Contac Updated");
+      Navigator.of(context).pushReplacementNamed(LogInScreen.routeName);
+    } else if (status == "failed") {
+      showErrorMessage(context, message: "OTP failed");
+    }
   }
 }
