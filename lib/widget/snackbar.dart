@@ -4,7 +4,7 @@ void showErrorMessage(BuildContext context, {required String message}) {
   final snackBar = SnackBar(
     content: Text(
       message,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.white,
       ),
     ),
@@ -17,7 +17,7 @@ void showSuccessMessage(BuildContext context, {required String message}) {
   final snackBar = SnackBar(
     content: Text(
       message,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.white,
       ),
     ),

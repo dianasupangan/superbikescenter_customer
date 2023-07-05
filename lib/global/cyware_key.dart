@@ -3,8 +3,8 @@ import 'package:crypto/crypto.dart';
 import 'date.dart';
 
 String cywareCodeLogIn(String loandID) {
-  final cyware_key = "login$loandID${dateNow()}";
-  final convert = md5.convert(utf8.encode(cyware_key)).toString();
+  final cywareKey = "login$loandID${dateNow()}";
+  final convert = md5.convert(utf8.encode(cywareKey)).toString();
 
   final finalConvert = md5.convert(utf8.encode(convert)).toString();
 
@@ -12,8 +12,8 @@ String cywareCodeLogIn(String loandID) {
 }
 
 String cywareCodeOtp(String loandID) {
-  final cyware_key = "verify$loandID${dateNow()}";
-  final convert = md5.convert(utf8.encode(cyware_key)).toString();
+  final cywareKey = "verify$loandID${dateNow()}";
+  final convert = md5.convert(utf8.encode(cywareKey)).toString();
 
   final finalConvert = md5.convert(utf8.encode(convert)).toString();
 
@@ -21,8 +21,8 @@ String cywareCodeOtp(String loandID) {
 }
 
 String cywareCodeOldNum(String loandID) {
-  final cyware_key = "confirm_old_number$loandID${dateNow()}";
-  final convert = md5.convert(utf8.encode(cyware_key)).toString();
+  final cywareKey = "confirm_old_number$loandID${dateNow()}";
+  final convert = md5.convert(utf8.encode(cywareKey)).toString();
 
   final finalConvert = md5.convert(utf8.encode(convert)).toString();
 
@@ -30,8 +30,8 @@ String cywareCodeOldNum(String loandID) {
 }
 
 String cywareCodeOldNumOtp(String loandID) {
-  final cyware_key = "confirm_old_number_otp$loandID${dateNow()}";
-  final convert = md5.convert(utf8.encode(cyware_key)).toString();
+  final cywareKey = "confirm_old_number_otp$loandID${dateNow()}";
+  final convert = md5.convert(utf8.encode(cywareKey)).toString();
 
   final finalConvert = md5.convert(utf8.encode(convert)).toString();
 
@@ -39,8 +39,8 @@ String cywareCodeOldNumOtp(String loandID) {
 }
 
 String cywareCodeNewNum(String loandID) {
-  final cyware_key = "update_mobile$loandID${dateNow()}";
-  final convert = md5.convert(utf8.encode(cyware_key)).toString();
+  final cywareKey = "update_mobile$loandID${dateNow()}";
+  final convert = md5.convert(utf8.encode(cywareKey)).toString();
 
   final finalConvert = md5.convert(utf8.encode(convert)).toString();
 
@@ -48,8 +48,8 @@ String cywareCodeNewNum(String loandID) {
 }
 
 String cywareCodeNewNumOtp(String loandID) {
-  final cyware_key = "update_mobile_otp$loandID${dateNow()}";
-  final convert = md5.convert(utf8.encode(cyware_key)).toString();
+  final cywareKey = "update_mobile_otp$loandID${dateNow()}";
+  final convert = md5.convert(utf8.encode(cywareKey)).toString();
 
   final finalConvert = md5.convert(utf8.encode(convert)).toString();
 

@@ -8,6 +8,7 @@ class ChangeNumberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // backgroundColor: Color.fromRGBO(76, 134, 182, 1),
@@ -34,37 +35,69 @@ class ChangeNumberScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // const LogoHeader(),
-                  Padding(
-                    padding: const EdgeInsets.all(9.0),
-                    child: const Text(
-                      "New Number",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.normal,
+              alignment: Alignment.center,
+              child: dWidth > 500
+                  ? SizedBox(
+                      width: 500,
+                      height: 550,
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.white,
+                        child: const ChangeNumberPage(),
+                      ),
+                    )
+                  : FractionallySizedBox(
+                      widthFactor: .9,
+                      heightFactor: .7,
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.white,
+                        child: const ChangeNumberPage(),
                       ),
                     ),
-                  ),
-                  const FractionallySizedBox(
-                    widthFactor: 0.9,
-                    child: ChangeNumForm(),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(LogInScreen.routeName);
-                    },
-                    child: const Text("< Back"),
-                  ),
-                ],
-              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class ChangeNumberPage extends StatelessWidget {
+  const ChangeNumberPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // const LogoHeader(),
+        const Padding(
+          padding: EdgeInsets.all(9.0),
+          child: Text(
+            "New Number",
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
+        const FractionallySizedBox(
+          widthFactor: 0.9,
+          child: ChangeNumForm(),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(LogInScreen.routeName);
+          },
+          child: const Text("< Back"),
+        ),
+      ],
     );
   }
 }

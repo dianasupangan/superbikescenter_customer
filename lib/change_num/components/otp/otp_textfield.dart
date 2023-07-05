@@ -15,11 +15,13 @@ import 'otp_input.dart';
 class OtpTextField extends StatefulWidget {
   final String loanId;
   final String mobileNum;
+  final String otp;
 
   const OtpTextField({
     super.key,
     required this.loanId,
     required this.mobileNum,
+    required this.otp,
   });
 
   @override
@@ -126,7 +128,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
 
   Future<void> confirmOTP() async {
     final loanIdData = Provider.of<LoanId>(context, listen: false);
-    final otp = _otp;
+    // final otp = _otp;
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
     final cywareCode = cywareCodeNewNumOtp(loanId);
@@ -139,7 +141,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
             "state": "state_update_mobile_otp",
             "loan_id": loanId,
             "mobile_number": mobileNum,
-            "otp": otp,
+            "otp": widget.otp,
             "cyware_key": cywareCode,
             "is_debug": "1"
           }
@@ -152,11 +154,12 @@ class _OtpTextFieldState extends State<OtpTextField> {
     final status = json['cyware_super_bikes']['result']['status'];
 
     if (status == "success") {
-      loanIdData.add(widget.loanId);
-      showSuccessMessage(context, message: "Contac Updated");
+      loanIdData.clear();
+      showSuccessMessage(context, message: "Contact Updated");
       Navigator.of(context).pushReplacementNamed(LogInScreen.routeName);
     } else if (status == "failed") {
       showErrorMessage(context, message: "OTP failed");
+      Navigator.of(context).pop();
     }
   }
 }

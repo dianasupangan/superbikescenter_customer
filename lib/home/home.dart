@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // backgroundColor: Color.fromRGBO(76, 134, 182, 1),
@@ -36,52 +37,84 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                    child: FractionallySizedBox(
-                      widthFactor: .7,
-                      child: LogoHeader(),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                    child: FractionallySizedBox(
-                      widthFactor: 0.9,
-                      child: AccountDetails(),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child: FractionallySizedBox(
-                      widthFactor: 0.9,
-                      child: PaymentDetails(),
-                    ),
-                  ),
-                  FractionallySizedBox(
-                    widthFactor: 0.2,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Exit"),
-                          Icon(Icons.logout),
-                        ],
+              alignment: Alignment.center,
+              child: dWidth > 500
+                  ? SizedBox(
+                      width: 500,
+                      height: 550,
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.white,
+                        child: const HomePage(),
+                      ),
+                    )
+                  : FractionallySizedBox(
+                      widthFactor: .9,
+                      heightFactor: .7,
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.white,
+                        child: const HomePage(),
                       ),
                     ),
-                  ),
-                ],
-              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Padding(
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
+          child: FractionallySizedBox(
+            widthFactor: .7,
+            child: LogoHeader(),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
+          child: FractionallySizedBox(
+            widthFactor: 0.9,
+            child: AccountDetails(),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+          child: FractionallySizedBox(
+            widthFactor: 0.9,
+            child: PaymentDetails(),
+          ),
+        ),
+        FractionallySizedBox(
+          widthFactor: 0.2,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Exit"),
+                Icon(Icons.logout),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

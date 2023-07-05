@@ -32,28 +32,28 @@ class _AccountDetailsState extends State<AccountDetails> {
           child: SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //Name
                   Text(
                     userData.items.first.lastName.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
 
                   //Loan ID
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Loan ID: ",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         userData.items.first.loanID.toString(),
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
@@ -62,14 +62,14 @@ class _AccountDetailsState extends State<AccountDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Loan Status: ",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         userData.items.first.loanStatus.toString(),
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
@@ -78,14 +78,14 @@ class _AccountDetailsState extends State<AccountDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Loan Terms: ",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "${userData.items.first.loanTerms.toString()} Months",
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
@@ -94,14 +94,14 @@ class _AccountDetailsState extends State<AccountDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "# of Months Paid: ",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "${userData.items.first.numberMonthsPaid}  Months",
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),

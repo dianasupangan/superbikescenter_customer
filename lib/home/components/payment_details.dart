@@ -36,7 +36,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           child: SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,14 +44,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Payment Date: ",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         loanData.items.first.paymentDate.toString(),
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
@@ -60,14 +60,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Payment Amount: ",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "₱ $amount",
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
@@ -76,14 +76,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "OR Number: ",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         loanData.items.first.receiptNumber.toString(),
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),

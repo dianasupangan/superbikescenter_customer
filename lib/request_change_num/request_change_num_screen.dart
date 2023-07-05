@@ -8,6 +8,7 @@ class RequestChangeNumberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double dWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // backgroundColor: Color.fromRGBO(76, 134, 182, 1),
@@ -24,47 +25,67 @@ class RequestChangeNumberScreen extends StatelessWidget {
               Color.fromRGBO(76, 134, 182, 1),
             ],
           )),
-          child: FractionallySizedBox(
-            heightFactor: 0.7,
-            widthFactor: 0.7,
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // const LogoHeader(),
-                  Padding(
-                    padding: const EdgeInsets.all(9.0),
-                    child: const Text(
-                      "Change Number",
-                      style: TextStyle(
-                        fontSize: 25,
-                        // fontWeight: FontWeight.bold,
-                      ),
-                    ),
+          alignment: Alignment.center,
+          child: dWidth > 500
+              ? SizedBox(
+                  width: 500,
+                  height: 550,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.white,
+                    child: const RequestNumberPage(),
                   ),
-                  const FractionallySizedBox(
-                    widthFactor: 0.9,
-                    child: RequestChangeNumForm(),
+                )
+              : FractionallySizedBox(
+                  widthFactor: .9,
+                  heightFactor: .7,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.white,
+                    child: const RequestNumberPage(),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(LogInScreen.routeName);
-                    },
-                    child: const Text("< Back"),
-                  ),
-                ],
-              ),
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class RequestNumberPage extends StatelessWidget {
+  const RequestNumberPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // const LogoHeader(),
+        const Padding(
+          padding: EdgeInsets.all(9.0),
+          child: Text(
+            "Change Number",
+            style: TextStyle(
+              fontSize: 25,
+              // fontWeight: FontWeight.bold,
             ),
           ),
         ),
-      ),
+        const FractionallySizedBox(
+          widthFactor: 0.9,
+          child: RequestChangeNumForm(),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(LogInScreen.routeName);
+          },
+          child: const Text("< Back"),
+        ),
+      ],
     );
   }
 }

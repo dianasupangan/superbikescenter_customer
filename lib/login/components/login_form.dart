@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
+import 'package:superbikes/global/validate.dart';
 import 'package:superbikes/widget/snackbar.dart';
 
 import 'otp/otp_textfield.dart';
@@ -19,6 +20,8 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   late final loanIdController = TextEditingController();
   final mobileNumberController = TextEditingController();
+  bool isLoanId = false;
+  bool isPhoneNumberCorrect = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,15 @@ class _LoginFormState extends State<LoginForm> {
             vertical: 10,
           ),
           child: TextField(
-            decoration: const InputDecoration(
-              label: Text('Loan ID'),
-              border: OutlineInputBorder(),
+            onChanged: (value) {
+              setState(() {
+                isLoanId = Validate().validateLoanId(value);
+              });
+            },
+            decoration: InputDecoration(
+              label: const Text('Loan ID'),
+              border: const OutlineInputBorder(),
+              errorText: isLoanId == true ? null : "Enter your Loan ID",
             ),
             controller: loanIdController,
           ),
@@ -43,9 +52,17 @@ class _LoginFormState extends State<LoginForm> {
             vertical: 10,
           ),
           child: TextField(
-            decoration: const InputDecoration(
-              label: Text('Mobile Number'),
-              border: OutlineInputBorder(),
+            onChanged: (value) {
+              setState(() {
+                isPhoneNumberCorrect = Validate().validateMobNum(value);
+              });
+            },
+            decoration: InputDecoration(
+              label: const Text('Mobile Number'),
+              border: const OutlineInputBorder(),
+              errorText: isPhoneNumberCorrect == true
+                  ? null
+                  : "Enter your Mobile Number",
             ),
             controller: mobileNumberController,
           ),
@@ -133,25 +150,36 @@ class _LoginFormState extends State<LoginForm> {
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
 
-    print("json: " + json.toString());
+    print("json: $json");
 
-    final status = json['cyware_super_bikes']['result']['status'];
+    final status = json['cyware_super_bikes']['result']['result'];
 
-    if (status == "success") {
-      showMyDialog(loanId, mobileNum);
-    } else if (status == "failed") {
-      showErrorMessage(context, message: "Login fail");
+    if (status == "ok") {
+      final otp = json['cyware_super_bikes']['data']['otp'];
+      showMyDialog(loanId, mobileNum, otp);
+    } else if (status == "Invalid Loan ID!") {
+      showErrorMessage(context, message: "Invalid Loan ID!");
+    } else if (status == "Invalid Mobile  Number!") {
+      showErrorMessage(context, message: "Invalid Mobile  Number!");
+    } else {
+      showErrorMessage(context, message: "Connection Error");
     }
   }
 
-  void showMyDialog(String loanId, String mobileNum) async {
+  void showMyDialog(String loanId, String mobileNum, String otp) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Otp'),
-          actions: <Widget>[OtpTextField(loanId: loanId, mobileNum: mobileNum)],
+          actions: <Widget>[
+            OtpTextField(
+              loanId: loanId,
+              mobileNum: mobileNum,
+              otp: otp,
+            )
+          ],
         );
       },
     );

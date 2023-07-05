@@ -17,11 +17,13 @@ import 'otp_input.dart';
 class OtpTextField extends StatefulWidget {
   final String loanId;
   final String mobileNum;
+  final String otp;
 
   const OtpTextField({
     super.key,
     required this.loanId,
     required this.mobileNum,
+    required this.otp,
   });
 
   @override
@@ -130,7 +132,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
     final userData = Provider.of<User>(context, listen: false);
     final loanData = Provider.of<Loan>(context, listen: false);
     // showMyDialog();
-    final otp = _otp;
+    // final otp = _otp;
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
     final cywareCode = cywareCodeOtp(loanId);
@@ -143,7 +145,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
             "state": "state_login_otp",
             "loan_id": loanId,
             "mobile_number": mobileNum,
-            "otp": otp,
+            "otp": widget.otp,
             "cyware_key": cywareCode,
             "is_debug": "1"
           }

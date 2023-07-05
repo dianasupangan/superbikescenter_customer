@@ -8,6 +8,7 @@ import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
 import 'package:superbikes/widget/snackbar.dart';
 
+import '../../global/validate.dart';
 import '../../provider/loan_id.dart';
 import 'otp/otp_textfield.dart';
 
@@ -21,6 +22,8 @@ class ChangeNumForm extends StatefulWidget {
 class _ChangeNumFormState extends State<ChangeNumForm> {
   late final mobileNumberController = TextEditingController();
   final confirmMobileNumberController = TextEditingController();
+  bool isPhoneNumberCorrect = false;
+  bool isPhoneNumberCorrectA = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +35,17 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
             vertical: 10,
           ),
           child: TextField(
-            decoration: const InputDecoration(
-              label: Text('New Mobile Number'),
-              border: OutlineInputBorder(),
+            onChanged: (value) {
+              setState(() {
+                isPhoneNumberCorrect = Validate().validateMobNum(value);
+              });
+            },
+            decoration: InputDecoration(
+              label: const Text('New Mobile Number'),
+              border: const OutlineInputBorder(),
+              errorText: isPhoneNumberCorrect == true
+                  ? null
+                  : "Enter your Mobile Number",
             ),
             controller: mobileNumberController,
           ),
@@ -45,9 +56,17 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
             vertical: 10,
           ),
           child: TextField(
-            decoration: const InputDecoration(
-              label: Text('Confirm New Mobile Number'),
-              border: OutlineInputBorder(),
+            onChanged: (value) {
+              setState(() {
+                isPhoneNumberCorrectA = Validate().validateMobNum(value);
+              });
+            },
+            decoration: InputDecoration(
+              label: const Text('Confirm New Mobile Number'),
+              border: const OutlineInputBorder(),
+              errorText: isPhoneNumberCorrect == true
+                  ? null
+                  : "Enter your Mobile Number",
             ),
             controller: confirmMobileNumberController,
           ),
@@ -138,28 +157,33 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
       final utf = utf8.decode(response.bodyBytes);
       final json = jsonDecode(utf);
 
-      print("json: " + json.toString());
+      print("json: $json");
 
       final status = json['cyware_super_bikes']['result']['status'];
 
       if (status == "success") {
-        showMyDialog(loanId, mobileNum);
+        final otp = json['cyware_super_bikes']['data']['otp'];
+        showMyDialog(loanId, mobileNum, otp);
       } else if (status == "failed") {
         showErrorMessage(context, message: "Update Failed");
+      } else {
+        showErrorMessage(context, message: "Error");
       }
     } else {
       showErrorMessage(context, message: "Numbers does not match");
     }
   }
 
-  void showMyDialog(String loanId, String mobileNum) async {
+  void showMyDialog(String loanId, String mobileNum, String otp) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Otp'),
-          actions: <Widget>[OtpTextField(loanId: loanId, mobileNum: mobileNum)],
+          actions: <Widget>[
+            OtpTextField(loanId: loanId, mobileNum: mobileNum, otp: otp)
+          ],
         );
       },
     );
