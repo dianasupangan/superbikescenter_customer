@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
@@ -20,8 +21,8 @@ class RequestChangeNumForm extends StatefulWidget {
 class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
   late final loanIdController = TextEditingController();
   final mobileNumberController = TextEditingController();
-  bool isLoanId = false;
-  bool isPhoneNumberCorrect = false;
+  bool isLoanId = true;
+  bool isPhoneNumberCorrect = true;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,9 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
               errorText: isLoanId == true ? null : "Enter your Loan ID",
             ),
             controller: loanIdController,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9-]'))
+            ],
           ),
         ),
         Padding(
@@ -65,6 +69,10 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
                   : "Enter your Mobile Number",
             ),
             controller: mobileNumberController,
+            keyboardType: TextInputType.phone,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+            ],
           ),
         ),
         Padding(
@@ -160,6 +168,8 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
       showErrorMessage(context, message: "Invalid Loan ID!");
     } else if (status == "Invalid Mobile  Number!") {
       showErrorMessage(context, message: "Invalid Mobile  Number!");
+    } else if (status == " Invalid API Key!") {
+      showErrorMessage(context, message: "Invalid API Key!");
     } else {
       showErrorMessage(context, message: "Connection Error");
     }

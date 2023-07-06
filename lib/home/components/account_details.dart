@@ -39,7 +39,8 @@ class _AccountDetailsState extends State<AccountDetails> {
                   //Name
                   Text(
                     userData.items.first.lastName.toString(),
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
 
                   //Loan ID
@@ -84,7 +85,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "${userData.items.first.loanTerms.toString()} Months",
+                        "${userData.items.first.loanTerms.toString()} Years",
                         style: const TextStyle(fontSize: 13),
                       ),
                     ],
@@ -100,7 +101,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "${userData.items.first.numberMonthsPaid}  Months",
+                        userData.items.first.numberMonthsPaid,
                         style: const TextStyle(fontSize: 13),
                       ),
                     ],

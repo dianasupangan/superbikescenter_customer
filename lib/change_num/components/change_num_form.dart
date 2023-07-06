@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:superbikes/global/cyware_key.dart';
@@ -22,8 +23,8 @@ class ChangeNumForm extends StatefulWidget {
 class _ChangeNumFormState extends State<ChangeNumForm> {
   late final mobileNumberController = TextEditingController();
   final confirmMobileNumberController = TextEditingController();
-  bool isPhoneNumberCorrect = false;
-  bool isPhoneNumberCorrectA = false;
+  bool isPhoneNumberCorrect = true;
+  bool isPhoneNumberCorrectA = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,10 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
                   : "Enter your Mobile Number",
             ),
             controller: mobileNumberController,
+            keyboardType: TextInputType.phone,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+            ],
           ),
         ),
         Padding(
@@ -64,11 +69,15 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
             decoration: InputDecoration(
               label: const Text('Confirm New Mobile Number'),
               border: const OutlineInputBorder(),
-              errorText: isPhoneNumberCorrect == true
+              errorText: isPhoneNumberCorrectA == true
                   ? null
                   : "Enter your Mobile Number",
             ),
             controller: confirmMobileNumberController,
+            keyboardType: TextInputType.phone,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+            ],
           ),
         ),
         Padding(
@@ -166,6 +175,8 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
         showMyDialog(loanId, mobileNum, otp);
       } else if (status == "failed") {
         showErrorMessage(context, message: "Update Failed");
+      } else if (status == " Invalid API Key!!") {
+        showErrorMessage(context, message: "Invalid API Key!");
       } else {
         showErrorMessage(context, message: "Error");
       }

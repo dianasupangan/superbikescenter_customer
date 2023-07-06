@@ -131,8 +131,6 @@ class _OtpTextFieldState extends State<OtpTextField> {
   Future<void> confirmOTP() async {
     final userData = Provider.of<User>(context, listen: false);
     final loanData = Provider.of<Loan>(context, listen: false);
-    // showMyDialog();
-    // final otp = _otp;
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
     final cywareCode = cywareCodeOtp(loanId);
@@ -154,10 +152,15 @@ class _OtpTextFieldState extends State<OtpTextField> {
     );
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
+    print(json);
 
-    final status = json['cyware_super_bikes']['result']['status'];
+    final status = json['cyware_super_bikes']['result']['result'];
+    // print(status);
 
-    if (status == "success") {
+    if (status == "ok") {
+      userData.clear();
+      loanData.clear();
+
       final acctName =
           json['cyware_super_bikes']['data']['account_name'].toString();
       final loanStat =
@@ -178,9 +181,15 @@ class _OtpTextFieldState extends State<OtpTextField> {
 
       showSuccessMessage(context, message: "Log in success");
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-    } else if (status == "failed") {
+    } else if (status == "Invalid OTP!") {
+      showErrorMessage(context, message: "OTP failed");
       Navigator.of(context).pop();
-      showErrorMessage(context, message: "Login failed");
+    } else if (status == "Invalid API Key!") {
+      showErrorMessage(context, message: "Invalid API Key!");
+      Navigator.of(context).pop();
+    } else {
+      showErrorMessage(context, message: "Connection Error");
+      Navigator.of(context).pop();
     }
   }
 }

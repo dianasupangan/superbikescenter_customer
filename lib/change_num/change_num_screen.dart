@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:superbikes/change_num/components/change_num_form.dart';
 import 'package:superbikes/login/login_screen.dart';
 
+import '../global/logo_header.dart';
+
 class ChangeNumberScreen extends StatelessWidget {
   const ChangeNumberScreen({super.key});
   static const routeName = 'change-number';
@@ -72,32 +74,33 @@ class ChangeNumberPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // const LogoHeader(),
-        const Padding(
-          padding: EdgeInsets.all(9.0),
-          child: Text(
-            "New Number",
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const LogoHeader(),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            "New Phone Number",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.normal,
             ),
           ),
-        ),
-        const FractionallySizedBox(
-          widthFactor: 0.9,
-          child: ChangeNumForm(),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(LogInScreen.routeName);
-          },
-          child: const Text("< Back"),
-        ),
-      ],
+          const SizedBox(
+            height: 5,
+          ),
+          const ChangeNumForm(),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(LogInScreen.routeName);
+            },
+            child: const Text("< Back"),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -152,15 +152,19 @@ class _OtpTextFieldState extends State<OtpTextField> {
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
 
-    final status = json['cyware_super_bikes']['result']['status'];
+    final status = json['cyware_super_bikes']['result']['result'];
 
-    if (status == "success") {
+    if (status == "ok") {
       loanIdData.add(widget.loanId);
       Navigator.of(context).pushReplacementNamed(ChangeNumberScreen.routeName);
-    } else if (status == "failed") {
-      showErrorMessage(context, message: "OTP not valid");
+    } else if (status == "Invalid OTP!") {
+      showErrorMessage(context, message: "OTP failed");
+      Navigator.of(context).pop();
+    } else if (status == " Invalid API Key!") {
+      showErrorMessage(context, message: "Invalid API Key!");
+      Navigator.of(context).pop();
     } else {
-      showErrorMessage(context, message: "Error verifying OTP");
+      showErrorMessage(context, message: "Connection Error");
       Navigator.of(context).pop();
     }
   }

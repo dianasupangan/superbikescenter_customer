@@ -67,26 +67,24 @@ class LogInPage extends StatefulWidget {
 class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const LogoHeader(),
-            const SizedBox(
-              height: 20,
-            ),
-            const LoginForm(),
-            const Text("Please keep your mobile number updated"),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(RequestChangeNumberScreen.routeName);
-              },
-              child: const Text("Update here"),
-            ),
-          ],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const LogoHeader(),
+          const SizedBox(
+            height: 20,
+          ),
+          const LoginForm(),
+          const Text("Please keep your mobile number updated"),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(RequestChangeNumberScreen.routeName);
+            },
+            child: const Text("Update here"),
+          ),
+        ],
       ),
     );
   }
