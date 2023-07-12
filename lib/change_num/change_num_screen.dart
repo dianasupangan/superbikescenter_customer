@@ -27,42 +27,30 @@ class ChangeNumberScreen extends StatelessWidget {
               Color.fromRGBO(76, 134, 182, 1),
             ],
           )),
-          child: FractionallySizedBox(
-            heightFactor: 0.7,
-            widthFactor: 0.7,
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              alignment: Alignment.center,
-              child: dWidth > 500
-                  ? SizedBox(
-                      width: 500,
-                      height: 550,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        height: double.infinity,
-                        color: Colors.white,
-                        child: const ChangeNumberPage(),
-                      ),
-                    )
-                  : FractionallySizedBox(
-                      widthFactor: .9,
-                      heightFactor: .7,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        height: double.infinity,
-                        color: Colors.white,
-                        child: const ChangeNumberPage(),
-                      ),
-                    ),
-            ),
-          ),
+          alignment: Alignment.center,
+          child: dWidth > 500
+              ? SizedBox(
+                  width: 500,
+                  height: 550,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.white,
+                    child: const ChangeNumberPage(),
+                  ),
+                )
+              : FractionallySizedBox(
+                  widthFactor: .9,
+                  heightFactor: .7,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.white,
+                    child: const ChangeNumberPage(),
+                  ),
+                ),
         ),
       ),
     );

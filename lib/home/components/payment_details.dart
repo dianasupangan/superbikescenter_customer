@@ -18,7 +18,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
     final formatCurrency = NumberFormat.currency(symbol: "₱");
 
     final amount = formatCurrency
-        .format(int.parse(loanData.items.first.paymentAmount.toString()));
+        .format(double.parse(loanData.items.first.paymentAmount.toString()));
     // f.format(int.parse(loanData.items.first.paymentAmount.toString()));
     return Column(
       children: [
@@ -29,7 +29,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           child: const Text(
             "Last Payment Details:",
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 17,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -49,11 +49,11 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       const Text(
                         "Payment Date: ",
                         style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
+                            fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         loanData.items.first.paymentDate.toString(),
-                        style: const TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 17),
                       ),
                     ],
                   ),
@@ -65,11 +65,11 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       const Text(
                         "Payment Amount: ",
                         style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
+                            fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         amount,
-                        style: const TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 17),
                       ),
                     ],
                   ),
@@ -81,11 +81,11 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       const Text(
                         "OR Number: ",
                         style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
+                            fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         loanData.items.first.receiptNumber.toString(),
-                        style: const TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 17),
                       ),
                     ],
                   ),

@@ -85,11 +85,22 @@ class _LoginFormState extends State<LoginForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: ElevatedButton(
                       onPressed: () {
-                        logIn();
-                        setState(() {
-                          loanIdController.text = '';
-                          mobileNumberController.text = '';
-                        });
+                        if (loanIdController.text == "") {
+                          showErrorMessage(context, message: "Enter Loan ID");
+                        } else if (mobileNumberController.text == "") {
+                          showErrorMessage(context,
+                              message: "Enter Mobile Number");
+                        } else if (loanIdController.text == "" &&
+                            mobileNumberController.text == "") {
+                          showErrorMessage(context,
+                              message: "Accomplish all fields");
+                        } else {
+                          logIn();
+                          setState(() {
+                            loanIdController.text = '';
+                            mobileNumberController.text = '';
+                          });
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(
@@ -158,7 +169,7 @@ class _LoginFormState extends State<LoginForm> {
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
 
-    // print("json: $json");
+    print("json: $json");
 
     final status = json['cyware_super_bikes']['result']['result'];
     // print(status);
@@ -172,6 +183,8 @@ class _LoginFormState extends State<LoginForm> {
       showErrorMessage(context, message: "Invalid Mobile  Number!");
     } else if (status == " Invalid API Key!") {
       showErrorMessage(context, message: "Invalid API Key!");
+    } else if (status == "ERROR CUSTOMER NOT FOUND!") {
+      showErrorMessage(context, message: "Account not found!");
     } else {
       showErrorMessage(context, message: "Connection Error");
     }
@@ -183,7 +196,10 @@ class _LoginFormState extends State<LoginForm> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Otp'),
+          title: const Text(
+            'Log In OTP',
+            textAlign: TextAlign.center,
+          ),
           actions: <Widget>[
             OtpTextField(
               loanId: loanId,

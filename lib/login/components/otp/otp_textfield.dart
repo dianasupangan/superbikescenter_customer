@@ -155,7 +155,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
     print(json);
 
     final status = json['cyware_super_bikes']['result']['result'];
-    // print(status);
+    print(json);
 
     if (status == "ok") {
       userData.clear();
@@ -182,7 +182,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
       showSuccessMessage(context, message: "Log in success");
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } else if (status == "Invalid OTP!") {
-      showErrorMessage(context, message: "OTP failed");
+      showErrorMessage(context, message: "OTP invalid");
       Navigator.of(context).pop();
     } else if (status == "Invalid API Key!") {
       showErrorMessage(context, message: "Invalid API Key!");

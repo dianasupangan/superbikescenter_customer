@@ -178,10 +178,10 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
       } else if (status == " Invalid API Key!!") {
         showErrorMessage(context, message: "Invalid API Key!");
       } else {
-        showErrorMessage(context, message: "Error");
+        showErrorMessage(context, message: "Connection Error");
       }
     } else {
-      showErrorMessage(context, message: "Numbers does not match");
+      showErrorMessage(context, message: "Phone number does not match");
     }
   }
 
@@ -191,7 +191,10 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Otp'),
+          title: const Text(
+            'Update Number In OTP',
+            textAlign: TextAlign.center,
+          ),
           actions: <Widget>[
             OtpTextField(loanId: loanId, mobileNum: mobileNum, otp: otp)
           ],

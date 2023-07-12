@@ -85,11 +85,22 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: ElevatedButton(
                       onPressed: () {
-                        confirmAccount();
-                        setState(() {
-                          loanIdController.text = '';
-                          mobileNumberController.text = '';
-                        });
+                        if (loanIdController.text == "" &&
+                            mobileNumberController.text == "") {
+                          showErrorMessage(context,
+                              message: "Accomplish all fields");
+                        } else if (loanIdController.text == "") {
+                          showErrorMessage(context, message: "Enter Loan ID");
+                        } else if (mobileNumberController.text == "") {
+                          showErrorMessage(context,
+                              message: "Enter Mobile Number");
+                        } else {
+                          confirmAccount();
+                          setState(() {
+                            loanIdController.text = '';
+                            mobileNumberController.text = '';
+                          });
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(
@@ -141,6 +152,7 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
     final loanId = loanIdController.text;
     final mobileNum = mobileNumberController.text;
     final cywareCode = cywareCodeOldNum(loanId);
+    print(cywareCode);
     var url = Uri.parse(link_header);
     var response = await http.post(
       url,
@@ -170,6 +182,8 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
       showErrorMessage(context, message: "Invalid Mobile  Number!");
     } else if (status == " Invalid API Key!") {
       showErrorMessage(context, message: "Invalid API Key!");
+    } else if (status == "Invalid Account! ") {
+      showErrorMessage(context, message: "Account not found!");
     } else {
       showErrorMessage(context, message: "Connection Error");
     }
@@ -181,7 +195,10 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Otp'),
+          title: const Text(
+            'Confirm Account OTP',
+            textAlign: TextAlign.center,
+          ),
           actions: <Widget>[
             OtpTextField(loanId: loanId, mobileNum: mobileNum, otp: otp)
           ],

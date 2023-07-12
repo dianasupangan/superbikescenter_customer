@@ -151,6 +151,8 @@ class _OtpTextFieldState extends State<OtpTextField> {
     );
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
+    print("$loanId & $mobileNum");
+    print(json);
 
     final status = json['cyware_super_bikes']['result']['result'];
 
@@ -162,6 +164,9 @@ class _OtpTextFieldState extends State<OtpTextField> {
       Navigator.of(context).pop();
     } else if (status == " Invalid API Key!") {
       showErrorMessage(context, message: "Invalid API Key!");
+      Navigator.of(context).pop();
+    } else if (status == "Account not found! ") {
+      showErrorMessage(context, message: "Account not found!");
       Navigator.of(context).pop();
     } else {
       showErrorMessage(context, message: "Connection Error");
