@@ -85,9 +85,10 @@ class _LoginFormState extends State<LoginForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (loanIdController.text == "") {
+                        if (loanIdController.text == "" && isLoanId == false) {
                           showErrorMessage(context, message: "Enter Loan ID");
-                        } else if (mobileNumberController.text == "") {
+                        } else if (mobileNumberController.text == "" &&
+                            isPhoneNumberCorrect == false) {
                           showErrorMessage(context,
                               message: "Enter Mobile Number");
                         } else if (loanIdController.text == "" &&

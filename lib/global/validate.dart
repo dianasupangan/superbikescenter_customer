@@ -1,9 +1,7 @@
 class Validate {
   bool validateLoanId(String input) {
-    final validCharacters = RegExp(r'^[0-9-]+$');
-    if (validCharacters.hasMatch(input) == true &&
-        input.contains("-") == true &&
-        input.length >= 11) {
+    final validCharacters = RegExp(r'^[0-9]+$');
+    if (validCharacters.hasMatch(input) == true && input.isNotEmpty) {
       return true;
     } else {
       return false;

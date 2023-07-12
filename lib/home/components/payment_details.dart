@@ -19,7 +19,6 @@ class _PaymentDetailsState extends State<PaymentDetails> {
 
     final amount = formatCurrency
         .format(double.parse(loanData.items.first.paymentAmount.toString()));
-    // f.format(int.parse(loanData.items.first.paymentAmount.toString()));
     return Column(
       children: [
         Container(
@@ -52,7 +51,10 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        loanData.items.first.paymentDate.toString(),
+                        DateFormat('MM/dd/yyyy')
+                            .format(DateTime.parse(
+                                loanData.items.first.paymentDate.toString()))
+                            .toString(),
                         style: const TextStyle(fontSize: 17),
                       ),
                     ],

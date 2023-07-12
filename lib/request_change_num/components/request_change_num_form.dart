@@ -89,9 +89,11 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
                             mobileNumberController.text == "") {
                           showErrorMessage(context,
                               message: "Accomplish all fields");
-                        } else if (loanIdController.text == "") {
+                        } else if (loanIdController.text == "" &&
+                            isLoanId == false) {
                           showErrorMessage(context, message: "Enter Loan ID");
-                        } else if (mobileNumberController.text == "") {
+                        } else if (mobileNumberController.text == "" &&
+                            isPhoneNumberCorrect == false) {
                           showErrorMessage(context,
                               message: "Enter Mobile Number");
                         } else {

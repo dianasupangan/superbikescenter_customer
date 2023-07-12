@@ -90,11 +90,17 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: ElevatedButton(
                       onPressed: () {
-                        logIn();
-                        setState(() {
+                        if (mobileNumberController.text == "" ||
+                            isPhoneNumberCorrect == false ||
+                            confirmMobileNumberController.text == "" ||
+                            isPhoneNumberCorrectA == false) {
+                          showErrorMessage(context,
+                              message: "Please enter a valid number");
+                        } else {
+                          logIn();
                           confirmMobileNumberController.text = '';
                           mobileNumberController.text = '';
-                        });
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(
