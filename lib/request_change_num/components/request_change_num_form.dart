@@ -108,6 +108,12 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
                         minimumSize: const Size.fromHeight(
                           50,
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: const BorderSide(
+                            color: Color.fromRGBO(0, 89, 162, 1),
+                          ),
+                        ),
                         backgroundColor: const Color.fromRGBO(0, 89, 162, 1),
                         foregroundColor: Colors.white,
                       ),

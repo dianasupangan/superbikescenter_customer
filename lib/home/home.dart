@@ -67,12 +67,9 @@ class HomePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-          child: FractionallySizedBox(
-            widthFactor: .7,
-            child: LogoHeader(),
-          ),
+        const LogoHeader(),
+        const SizedBox(
+          height: 20,
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
@@ -97,6 +94,9 @@ class HomePage extends StatelessWidget {
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 Text("Exit"),
                 Icon(Icons.logout),
               ],
