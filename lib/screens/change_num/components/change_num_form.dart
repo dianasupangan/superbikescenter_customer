@@ -78,7 +78,8 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
             controller: confirmMobileNumberController,
             keyboardType: TextInputType.phone,
             inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              LengthLimitingTextInputFormatter(11),
             ],
           ),
         ),

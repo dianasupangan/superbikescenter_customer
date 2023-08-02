@@ -73,7 +73,8 @@ class _LoginFormState extends State<LoginForm> {
             controller: mobileNumberController,
             keyboardType: TextInputType.phone,
             inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              LengthLimitingTextInputFormatter(11),
             ],
           ),
         ),
@@ -218,6 +219,4 @@ class _LoginFormState extends State<LoginForm> {
       },
     );
   }
-  //001-0000663
-  //09123563874
 }

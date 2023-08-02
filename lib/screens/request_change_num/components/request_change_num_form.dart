@@ -47,7 +47,8 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
             ),
             controller: loanIdController,
             inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp(r'[0-9-]'))
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9-]')),
+              LengthLimitingTextInputFormatter(11),
             ],
           ),
         ),
