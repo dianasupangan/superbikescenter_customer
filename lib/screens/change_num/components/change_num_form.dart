@@ -9,8 +9,8 @@ import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
 import 'package:superbikes/widget/snackbar.dart';
 
-import '../../global/validate.dart';
-import '../../provider/loan_id.dart';
+import '../../../global/validate.dart';
+import '../../../provider/loan_id.dart';
 import 'otp/otp_textfield.dart';
 
 class ChangeNumForm extends StatefulWidget {
@@ -47,6 +47,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
               errorText: isPhoneNumberCorrect == true
                   ? null
                   : "Enter your Mobile Number",
+              hintText: "09XXXXXXXXX",
             ),
             controller: mobileNumberController,
             keyboardType: TextInputType.phone,
@@ -72,6 +73,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
               errorText: isPhoneNumberCorrectA == true
                   ? null
                   : "Enter your Mobile Number",
+              hintText: "09XXXXXXXXX",
             ),
             controller: confirmMobileNumberController,
             keyboardType: TextInputType.phone,
@@ -183,8 +185,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
       final status = json['cyware_super_bikes']['result']['status'];
 
       if (status == "success") {
-        final otp = json['cyware_super_bikes']['data']['otp'];
-        showMyDialog(loanId, mobileNum, otp);
+        showMyDialog(loanId, mobileNum);
       } else if (status == "failed") {
         showErrorMessage(context, message: "Update Failed");
       } else if (status == " Invalid API Key!!") {
@@ -197,7 +198,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
     }
   }
 
-  void showMyDialog(String loanId, String mobileNum, String otp) async {
+  void showMyDialog(String loanId, String mobileNum) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -207,9 +208,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
             'Update Number In OTP',
             textAlign: TextAlign.center,
           ),
-          actions: <Widget>[
-            OtpTextField(loanId: loanId, mobileNum: mobileNum, otp: otp)
-          ],
+          actions: <Widget>[OtpTextField(loanId: loanId, mobileNum: mobileNum)],
         );
       },
     );

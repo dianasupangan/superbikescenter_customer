@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:superbikes/home/components/account_details.dart';
-import 'package:superbikes/home/components/payment_details.dart';
+import 'package:superbikes/screens/home/components/account_details.dart';
+import 'package:superbikes/screens/home/components/payment_details.dart';
 
-import '../global/logo_header.dart';
+import '../../global/logo_header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                 )
               : FractionallySizedBox(
                   widthFactor: .9,
-                  heightFactor: .7,
+                  heightFactor: .9,
                   child: Container(
                     alignment: Alignment.center,
                     width: double.infinity,

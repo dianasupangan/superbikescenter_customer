@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:superbikes/change_num/components/change_num_form.dart';
-import 'package:superbikes/login/login_screen.dart';
+import 'package:superbikes/screens/login/login_screen.dart';
+import 'package:superbikes/screens/request_change_num/components/request_change_num_form.dart';
 
-import '../global/logo_header.dart';
+import '../../global/logo_header.dart';
 
-class ChangeNumberScreen extends StatelessWidget {
-  const ChangeNumberScreen({super.key});
-  static const routeName = 'change-number';
+class RequestChangeNumberScreen extends StatelessWidget {
+  const RequestChangeNumberScreen({super.key});
+  static const routeName = 'request-change-number';
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class ChangeNumberScreen extends StatelessWidget {
                     width: double.infinity,
                     height: double.infinity,
                     color: Colors.white,
-                    child: const ChangeNumberPage(),
+                    child: const RequestNumberPage(),
                   ),
                 )
               : FractionallySizedBox(
@@ -48,7 +48,7 @@ class ChangeNumberScreen extends StatelessWidget {
                     width: double.infinity,
                     height: double.infinity,
                     color: Colors.white,
-                    child: const ChangeNumberPage(),
+                    child: const RequestNumberPage(),
                   ),
                 ),
         ),
@@ -57,8 +57,8 @@ class ChangeNumberScreen extends StatelessWidget {
   }
 }
 
-class ChangeNumberPage extends StatelessWidget {
-  const ChangeNumberPage({super.key});
+class RequestNumberPage extends StatelessWidget {
+  const RequestNumberPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class ChangeNumberPage extends StatelessWidget {
             height: 20,
           ),
           Text(
-            "New Phone Number",
+            "Update Contact Number",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.normal,
@@ -80,7 +80,7 @@ class ChangeNumberPage extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          const ChangeNumForm(),
+          const RequestChangeNumForm(),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(LogInScreen.routeName);

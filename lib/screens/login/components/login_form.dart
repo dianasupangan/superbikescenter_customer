@@ -6,19 +6,19 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
+import 'package:superbikes/global/validate.dart';
 import 'package:superbikes/widget/snackbar.dart';
 
-import '../../global/validate.dart';
 import 'otp/otp_textfield.dart';
 
-class RequestChangeNumForm extends StatefulWidget {
-  const RequestChangeNumForm({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
   @override
-  State<RequestChangeNumForm> createState() => _RequestChangeNumFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
-class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
+class _LoginFormState extends State<LoginForm> {
   late final loanIdController = TextEditingController();
   final mobileNumberController = TextEditingController();
   bool isLoanId = true;
@@ -43,6 +43,7 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
               label: const Text('Loan ID'),
               border: const OutlineInputBorder(),
               errorText: isLoanId == true ? null : "Enter your Loan ID",
+              hintText: "XXX-XXXXXXX",
             ),
             controller: loanIdController,
             inputFormatters: <TextInputFormatter>[
@@ -67,6 +68,7 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
               errorText: isPhoneNumberCorrect == true
                   ? null
                   : "Enter your Mobile Number",
+              hintText: "09XXXXXXXXX",
             ),
             controller: mobileNumberController,
             keyboardType: TextInputType.phone,
@@ -85,19 +87,18 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (loanIdController.text == "" &&
-                            mobileNumberController.text == "") {
-                          showErrorMessage(context,
-                              message: "Accomplish all fields");
-                        } else if (loanIdController.text == "" &&
-                            isLoanId == false) {
+                        if (loanIdController.text == "" && isLoanId == false) {
                           showErrorMessage(context, message: "Enter Loan ID");
                         } else if (mobileNumberController.text == "" &&
                             isPhoneNumberCorrect == false) {
                           showErrorMessage(context,
                               message: "Enter Mobile Number");
+                        } else if (loanIdController.text == "" &&
+                            mobileNumberController.text == "") {
+                          showErrorMessage(context,
+                              message: "Accomplish all fields");
                         } else {
-                          confirmAccount();
+                          logIn();
                           setState(() {
                             loanIdController.text = '';
                             mobileNumberController.text = '';
@@ -117,7 +118,7 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
                         backgroundColor: const Color.fromRGBO(0, 89, 162, 1),
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text("Get OTP"),
+                      child: const Text("Log In"),
                     ),
                   ),
                 ),
@@ -156,17 +157,17 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
     );
   }
 
-  Future<void> confirmAccount() async {
+  Future<void> logIn() async {
+    // showMyDialog();
     final loanId = loanIdController.text;
     final mobileNum = mobileNumberController.text;
-    final cywareCode = cywareCodeOldNum(loanId);
-    print(cywareCode);
+    final cywareCode = cywareCodeLogIn(loanId);
     var url = Uri.parse(link_header);
     var response = await http.post(
       url,
       body: jsonEncode(<String, dynamic>{
         "super_bikes": {
-          "state": "state_old_mobile",
+          "state": "state_login",
           "loan_id": loanId,
           "mobile_number": mobileNum,
           "cyware_key": cywareCode,
@@ -180,38 +181,43 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
     print("json: $json");
 
     final status = json['cyware_super_bikes']['result']['result'];
+    // print(status);
 
     if (status == "ok") {
-      final otp = json['cyware_super_bikes']['data']['otp'];
-      showMyDialog(loanId, mobileNum, otp);
+      showMyDialog(loanId, mobileNum);
     } else if (status == "Invalid Loan ID!") {
       showErrorMessage(context, message: "Invalid Loan ID!");
     } else if (status == "Invalid Mobile  Number!") {
       showErrorMessage(context, message: "Invalid Mobile  Number!");
     } else if (status == " Invalid API Key!") {
       showErrorMessage(context, message: "Invalid API Key!");
-    } else if (status == "Invalid Account! ") {
+    } else if (status == "ERROR CUSTOMER NOT FOUND!") {
       showErrorMessage(context, message: "Account not found!");
     } else {
       showErrorMessage(context, message: "Connection Error");
     }
   }
 
-  void showMyDialog(String loanId, String mobileNum, String otp) async {
+  void showMyDialog(String loanId, String mobileNum) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text(
-            'Confirm Account OTP',
+            'Log In OTP',
             textAlign: TextAlign.center,
           ),
           actions: <Widget>[
-            OtpTextField(loanId: loanId, mobileNum: mobileNum, otp: otp)
+            OtpTextField(
+              loanId: loanId,
+              mobileNum: mobileNum,
+            )
           ],
         );
       },
     );
   }
+  //001-0000663
+  //09123563874
 }

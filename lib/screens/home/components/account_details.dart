@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/user.dart';
+import '../../../provider/user.dart';
 
 class AccountDetails extends StatefulWidget {
   const AccountDetails({super.key});

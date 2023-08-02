@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-import '../../provider/loan.dart';
+import '../../../provider/loan.dart';
 
 class PaymentDetails extends StatefulWidget {
   const PaymentDetails({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import "components/login_form.dart";
 
 import '../request_change_num/request_change_num_screen.dart';
-import '../global/logo_header.dart';
+import '../../global/logo_header.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
@@ -82,7 +82,7 @@ class _LogInPageState extends State<LogInPage> {
               Navigator.of(context)
                   .pushNamed(RequestChangeNumberScreen.routeName);
             },
-            child: const Text("Update here"),
+            child: const Text("Update Here"),
           ),
         ],
       ),

@@ -3,25 +3,24 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:superbikes/screens/change_num/change_num_screen.dart';
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
-import 'package:superbikes/login/login_screen.dart';
+import 'package:superbikes/screens/login/login_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:superbikes/provider/loan_id.dart';
 import 'package:superbikes/widget/snackbar.dart';
 
-import '../../../provider/loan_id.dart';
 import 'otp_input.dart';
 
 class OtpTextField extends StatefulWidget {
   final String loanId;
   final String mobileNum;
-  final String otp;
 
   const OtpTextField({
     super.key,
     required this.loanId,
     required this.mobileNum,
-    required this.otp,
   });
 
   @override
@@ -45,7 +44,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
 
   // This is the entered code
   // It will be displayed in a Text widget
-  String? _otp;
+  String? otp;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +77,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _otp = _fieldOne.text +
+                      otp = _fieldOne.text +
                           _fieldTwo.text +
                           _fieldThree.text +
                           _fieldFour.text;
@@ -128,20 +127,19 @@ class _OtpTextFieldState extends State<OtpTextField> {
 
   Future<void> confirmOTP() async {
     final loanIdData = Provider.of<LoanId>(context, listen: false);
-    // final otp = _otp;
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
-    final cywareCode = cywareCodeNewNumOtp(loanId);
+    final cywareCode = cywareCodeOldNumOtp(loanId);
     var url = Uri.parse(link_header);
     var response = await http.post(
       url,
       body: jsonEncode(
         <String, dynamic>{
           "super_bikes": {
-            "state": "state_update_mobile_otp",
+            "state": "state_old_mobile_otp",
             "loan_id": loanId,
             "mobile_number": mobileNum,
-            "otp": widget.otp,
+            "otp": otp,
             "cyware_key": cywareCode,
             "is_debug": "1"
           }
@@ -150,19 +148,22 @@ class _OtpTextFieldState extends State<OtpTextField> {
     );
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
+    print("$loanId & $mobileNum");
     print(json);
 
     final status = json['cyware_super_bikes']['result']['result'];
 
     if (status == "ok") {
-      loanIdData.clear();
-      showSuccessMessage(context, message: "Contact Updated");
-      Navigator.of(context).pushReplacementNamed(LogInScreen.routeName);
-    } else if (status == "Invalid OTP!") {
+      loanIdData.add(widget.loanId);
+      Navigator.of(context).pushReplacementNamed(ChangeNumberScreen.routeName);
+    } else if (status == "OTP NOT MATCH!") {
       showErrorMessage(context, message: "OTP failed");
       Navigator.of(context).pop();
-    } else if (status == " Invalid API Key!!") {
+    } else if (status == " Invalid API Key!") {
       showErrorMessage(context, message: "Invalid API Key!");
+      Navigator.of(context).pop();
+    } else if (status == "Account not found! ") {
+      showErrorMessage(context, message: "Account not found!");
       Navigator.of(context).pop();
     } else {
       showErrorMessage(context, message: "Connection Error");
