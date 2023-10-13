@@ -163,7 +163,6 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
     final loanId = loanIdController.text;
     final mobileNum = mobileNumberController.text;
     final cywareCode = cywareCodeOldNum(loanId);
-    print(cywareCode);
     var url = Uri.parse(link_header);
     var response = await http.post(
       url,
@@ -179,8 +178,6 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
     );
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
-
-    print("json: $json");
 
     final status = json['cyware_super_bikes']['result']['result'];
 

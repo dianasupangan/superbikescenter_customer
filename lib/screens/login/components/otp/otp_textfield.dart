@@ -131,7 +131,6 @@ class _OtpTextFieldState extends State<OtpTextField> {
     final loanData = Provider.of<Loan>(context, listen: false);
     final loanId = widget.loanId;
     final mobileNum = widget.mobileNum;
-    print(otp);
     final cywareCode = cywareCodeOtp(loanId);
     var url = Uri.parse(link_header);
     var response = await http.post(
@@ -151,7 +150,9 @@ class _OtpTextFieldState extends State<OtpTextField> {
     );
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
+
     print(json);
+    print(otp);
 
     final status = json['cyware_super_bikes']['result']['result'];
 

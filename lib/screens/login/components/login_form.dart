@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:get_mac_address/get_mac_address.dart';
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
 import 'package:superbikes/global/validate.dart';
@@ -171,6 +174,7 @@ class _LoginFormState extends State<LoginForm> {
           "state": "state_login",
           "loan_id": loanId,
           "mobile_number": mobileNum,
+          "device_name": getDeviceDetails().toString(),
           "cyware_key": cywareCode,
           "is_debug": "1"
         }
@@ -179,10 +183,9 @@ class _LoginFormState extends State<LoginForm> {
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
 
-    print("json: $json");
+    print(json);
 
     final status = json['cyware_super_bikes']['result']['result'];
-    // print(status);
 
     if (status == "ok") {
       showMyDialog(loanId, mobileNum);
@@ -218,5 +221,22 @@ class _LoginFormState extends State<LoginForm> {
         );
       },
     );
+  }
+
+  Future<String> getDeviceDetails() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    WebBrowserInfo webInfo = await deviceInfo.webBrowserInfo;
+    final device = webInfo.userAgent;
+    if (device!.contains("Macintosh")) {
+      return "Macintosh";
+    } else if (device.contains("iPhone")) {
+      return "iPhone";
+    } else if (device.contains("Android")) {
+      return "Android";
+    } else if (device.contains("Windows")) {
+      return "Windows";
+    } else {
+      return device;
+    }
   }
 }
