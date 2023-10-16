@@ -70,7 +70,7 @@ class RequestNumberPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             "Update Contact Number",
             style: TextStyle(
               fontSize: 25,

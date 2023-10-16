@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/screens/home/home.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:superbikes/screens/login/login_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:superbikes/provider/loan.dart';
@@ -29,8 +30,10 @@ class OtpTextField extends StatefulWidget {
 }
 
 class _OtpTextFieldState extends State<OtpTextField> {
+  String deviceName = "";
   @override
   void initState() {
+    getDeviceDetails();
     Timer(const Duration(minutes: 5), () {
       Navigator.of(context)
           .pop(MaterialPageRoute(builder: (context) => const LogInScreen()));
@@ -141,6 +144,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
             "state": "state_login_otp",
             "loan_id": loanId,
             "mobile_number": mobileNum,
+            "device_name": deviceName,
             "otp": otp,
             "cyware_key": cywareCode,
             "is_debug": "1"
@@ -190,5 +194,28 @@ class _OtpTextFieldState extends State<OtpTextField> {
       showErrorMessage(context, message: "Connection Error");
       Navigator.of(context).pop();
     }
+  }
+
+  Future<void> getDeviceDetails() async {
+    String dName = '';
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    WebBrowserInfo webInfo = await deviceInfo.webBrowserInfo;
+    final device = webInfo.userAgent;
+
+    if (device!.contains("Macintosh")) {
+      dName = "Macintosh";
+    } else if (device.contains("iPhone")) {
+      dName = "iPhone";
+    } else if (device.contains("Android")) {
+      dName = "Android";
+    } else if (device.contains("Windows")) {
+      dName = "Windows";
+    } else {
+      dName = device;
+    }
+
+    setState(() {
+      deviceName = dName;
+    });
   }
 }

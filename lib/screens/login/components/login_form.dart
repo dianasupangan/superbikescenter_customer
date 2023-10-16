@@ -26,6 +26,12 @@ class _LoginFormState extends State<LoginForm> {
   final mobileNumberController = TextEditingController();
   bool isLoanId = true;
   bool isPhoneNumberCorrect = true;
+  String deviceName = "";
+  @override
+  void initState() {
+    getDeviceDetails();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +180,7 @@ class _LoginFormState extends State<LoginForm> {
           "state": "state_login",
           "loan_id": loanId,
           "mobile_number": mobileNum,
-          "device_name": getDeviceDetails().toString(),
+          "device_name": deviceName,
           "cyware_key": cywareCode,
           "is_debug": "1"
         }
@@ -223,20 +229,26 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  Future<String> getDeviceDetails() async {
+  Future<void> getDeviceDetails() async {
+    String dName = '';
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     WebBrowserInfo webInfo = await deviceInfo.webBrowserInfo;
     final device = webInfo.userAgent;
+
     if (device!.contains("Macintosh")) {
-      return "Macintosh";
+      dName = "Macintosh";
     } else if (device.contains("iPhone")) {
-      return "iPhone";
+      dName = "iPhone";
     } else if (device.contains("Android")) {
-      return "Android";
+      dName = "Android";
     } else if (device.contains("Windows")) {
-      return "Windows";
+      dName = "Windows";
     } else {
-      return device;
+      dName = device;
     }
+
+    setState(() {
+      deviceName = dName;
+    });
   }
 }

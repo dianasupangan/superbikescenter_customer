@@ -70,7 +70,7 @@ class ChangeNumberPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             "New Phone Number",
             style: TextStyle(
               fontSize: 25,

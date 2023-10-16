@@ -43,7 +43,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                         fontSize: 23, fontWeight: FontWeight.bold),
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 13,
                   ),
 
