@@ -148,6 +148,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
     );
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
+    print(json);
 
     final status = json['cyware_super_bikes']['result']['result'];
 

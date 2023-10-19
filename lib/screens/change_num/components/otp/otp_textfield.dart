@@ -150,6 +150,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
     final json = jsonDecode(utf);
 
     final status = json['cyware_super_bikes']['result']['result'];
+    print(json);
 
     if (status == "ok") {
       loanIdData.clear();

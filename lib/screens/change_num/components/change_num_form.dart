@@ -180,6 +180,7 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
       );
       final utf = utf8.decode(response.bodyBytes);
       final json = jsonDecode(utf);
+      print(json);
 
       final status = json['cyware_super_bikes']['result']['status'];
 
