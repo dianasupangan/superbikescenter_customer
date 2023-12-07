@@ -44,6 +44,10 @@ class _LoginFormState extends State<LoginForm> {
           ),
           child: TextField(
             onChanged: (value) {
+              if (value.length == 3) {
+                loanIdController.text += '-';
+              }
+
               setState(() {
                 isLoanId = Validate().validateLoanId(value);
               });
