@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:get_mac_address/get_mac_address.dart';
 import 'package:superbikes/global/cyware_key.dart';
 import 'package:superbikes/global/link_header.dart';
 import 'package:superbikes/global/validate.dart';
