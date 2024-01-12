@@ -187,9 +187,8 @@ class _ChangeNumFormState extends State<ChangeNumForm> {
       if (status == "success") {
         showMyDialog(loanId, mobileNum);
       } else if (status == "failed") {
-        showErrorMessage(context, message: "Update Failed");
-      } else if (status == " Invalid API Key!!") {
-        showErrorMessage(context, message: "Invalid API Key!");
+        showErrorMessage(context,
+            message: json['cyware_super_bikes']['result']['result']);
       } else {
         showErrorMessage(context, message: "Connection Error");
       }

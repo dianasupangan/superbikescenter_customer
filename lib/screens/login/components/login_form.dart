@@ -193,19 +193,15 @@ class _LoginFormState extends State<LoginForm> {
     final json = jsonDecode(utf);
 
     print(json);
+    print("$loanId $mobileNum");
 
-    final status = json['cyware_super_bikes']['result']['result'];
+    final status = json['cyware_super_bikes']['result']['status'];
 
-    if (status == "ok") {
+    if (status == "success") {
       showMyDialog(loanId, mobileNum);
-    } else if (status == "Invalid Loan ID!") {
-      showErrorMessage(context, message: "Invalid Loan ID!");
-    } else if (status == "Invalid Mobile  Number!") {
-      showErrorMessage(context, message: "Invalid Mobile  Number!");
-    } else if (status == " Invalid API Key!") {
-      showErrorMessage(context, message: "Invalid API Key!");
-    } else if (status == "ERROR CUSTOMER NOT FOUND!") {
-      showErrorMessage(context, message: "Account not found!");
+    } else if (status == "failed") {
+      showErrorMessage(context,
+          message: json['cyware_super_bikes']['result']['result']);
     } else {
       showErrorMessage(context, message: "Connection Error");
     }

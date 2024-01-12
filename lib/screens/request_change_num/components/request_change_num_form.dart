@@ -178,20 +178,15 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
     );
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
-
-    final status = json['cyware_super_bikes']['result']['result'];
     print(json);
 
-    if (status == "ok") {
+    final status = json['cyware_super_bikes']['result']['status'];
+
+    if (status == "success") {
       showMyDialog(loanId, mobileNum);
-    } else if (status == "Invalid Loan ID!") {
-      showErrorMessage(context, message: "Invalid Loan ID!");
-    } else if (status == "Invalid Mobile  Number!") {
-      showErrorMessage(context, message: "Invalid Mobile  Number!");
-    } else if (status == " Invalid API Key!") {
-      showErrorMessage(context, message: "Invalid API Key!");
-    } else if (status == "Invalid Account! ") {
-      showErrorMessage(context, message: "Account not found!");
+    } else if (status == "failed") {
+      showErrorMessage(context,
+          message: json['cyware_super_bikes']['result']['result']);
     } else {
       showErrorMessage(context, message: "Connection Error");
     }
