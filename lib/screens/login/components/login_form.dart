@@ -43,13 +43,18 @@ class _LoginFormState extends State<LoginForm> {
           ),
           child: TextField(
             onChanged: (value) {
-              if (value.length == 3) {
-                loanIdController.text += '-';
-              }
+              if (!value.contains("-")) {
+                loanIdController.text =
+                    "${value.substring(0, 3)}-${value.substring(3, 10)}";
 
-              setState(() {
-                isLoanId = Validate().validateLoanId(value);
-              });
+                setState(() {
+                  isLoanId = true;
+                });
+              } else {
+                setState(() {
+                  isLoanId = Validate().validateLoanId(value);
+                });
+              }
             },
             decoration: InputDecoration(
               label: const Text('Loan ID'),
@@ -59,7 +64,8 @@ class _LoginFormState extends State<LoginForm> {
             ),
             controller: loanIdController,
             inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp(r'[0-9-]'))
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9-]')),
+              LengthLimitingTextInputFormatter(11),
             ],
           ),
         ),

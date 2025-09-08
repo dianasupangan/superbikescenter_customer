@@ -35,9 +35,18 @@ class _RequestChangeNumFormState extends State<RequestChangeNumForm> {
           ),
           child: TextField(
             onChanged: (value) {
-              setState(() {
-                isLoanId = Validate().validateLoanId(value);
-              });
+              if (!value.contains("-")) {
+                loanIdController.text =
+                    "${value.substring(0, 3)}-${value.substring(3, 10)}";
+
+                setState(() {
+                  isLoanId = true;
+                });
+              } else {
+                setState(() {
+                  isLoanId = Validate().validateLoanId(value);
+                });
+              }
             },
             decoration: InputDecoration(
               label: const Text('Loan ID'),
