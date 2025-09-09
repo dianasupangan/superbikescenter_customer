@@ -1,6 +1,6 @@
 # superbikes
 
-A new Flutter project.
+Superbikes motorbike loan checker.
 
 ## Getting Started
 
