@@ -41,11 +41,12 @@ dependencies:
   graphic: ^2.2.0
   intl: ^0.18.1
   crypto: ^3.0.3
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: "^0.14.4"
   device_info_plus: ^10.0.0
-  get_mac_address: ^0.0.2
 
 flutter_launcher_icons:
+  android: "launcher_icon"
+  min_sdk_android: 21 # android min sdk min:16, default 21
   image_path: "assets/images/icon.jpg"
   web:
     generate: true
